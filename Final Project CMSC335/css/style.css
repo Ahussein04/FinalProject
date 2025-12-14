@@ -1,0 +1,20 @@
+.theButton {
+    color: orange
+}
+
+p {
+    font-size: 20px;
+    font-family: 'Calibri', sans-serif;
+    color: rgb(0, 255, 47)
+}
+
+
+h1 {
+    font-family: 'Arial', Gadget, sans-serif;
+    color: red
+}
+
+#back {
+
+    background-color: blue;
+}
