@@ -116,7 +116,7 @@ app.get("/previousSearches", async (req, res) => {
   
       let pastWeather = await Weather.find({});
 	  let newTable = '<table style="border: 1px double black;">';
-    newTable += '<tr> <th style="border: 1px double black;">Name</th> <th style="border: 1px double black;">Temperature</th><th style="border: 1px double black;">Date of Lookup</th></tr>';
+    newTable += '<tr> <th style="border: 1px double black;">Name</th> <th style="border: 1px double black;">Temperature (in Celsius)</th><th style="border: 1px double black;">Date of Lookup</th></tr>';
   
 	 for(const dudes of pastWeather){
         newTable += "<tr>";
