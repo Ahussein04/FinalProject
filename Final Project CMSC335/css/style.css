@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 .theButton {
     color: orange
 }
 
 p {
     font-size: 20px;
-    font-family: 'Calibri', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     color: rgb(0, 255, 47)
 }
 
