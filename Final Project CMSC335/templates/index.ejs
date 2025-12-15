@@ -10,14 +10,33 @@
 <body id="back">
     
 	<h1>Welcome to the City Weather Lookup</h1>
+
+    <h2>Search by City Names</h3>
     <form action="/searchCity" method="get">
-	<p>Enter city name: <input type="text" value="Washington" name="cityName"> <input type="submit" value="Lookup Weather by City" class="theButton"></p>
-    
+        <p>City:<input type="text" name="cityName" value="College Park" required>
+
+        State / Region:(optional)<input type="text" name="region">
+
+        Country: (optional)<input type="text" name="country">
+        <input type="submit" value="Search Weather" class="theButton"> </p> 
+
+    </form>
+<!-- 
+     <h2> Search by Zip Code </h2>
+    <form action="/searchZip" method="get">
+	<p>Enter Zip Code: <input type="text" value="20850" name="zipCode"> <input type="submit" value="Search Weather by ZipCode" class="theButton"></p>
+     -->
+
+
     </form>
     <form action="/previousSearches" method="get">
         <input type="submit" value="See all previous city searches" class="theButton"></p>
     </form>
 	<hr>
+
+    <form action="/clearDatabase" method="get">
+    <input type="submit" value="CLEAR all previous Weather searches" class="theButton">
+</form>
 </body>
 
 </html>
