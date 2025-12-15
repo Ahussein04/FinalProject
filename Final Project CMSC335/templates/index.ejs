@@ -8,16 +8,16 @@
 </head>
 
 <body id="back">
-    <div>
+    
 	<h1>Welcome to the City Weather Lookup</h1>
     <form action="/searchCity" method="get">
-	<label id="para">Enter city name: <input type="text" value="Washington" name="cityName"> <input type="submit" value="Lookup Weather by City"></label>
-    <br><br>
-    <button onclick="location.href='/previousCity'">See Searched Cities</button>
+	<p>Enter city name: <input type="text" value="Washington" name="cityName"> <input type="submit" value="Lookup Weather by City" class="theButton"></p>
+    
     </form>
-	    <hr>
-	<p><a href="/">Back to Menu</a></p>
-    </div>
+    <form action="/previousSearches" method="get">
+        <input type="submit" value="See all previous city searches" class="theButton"></p>
+    </form>
+	<hr>
 </body>
 
 </html>
