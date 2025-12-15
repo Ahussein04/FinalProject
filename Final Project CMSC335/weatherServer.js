@@ -6,6 +6,14 @@ require("dotenv").config({
 });
 const { MongoClient, ServerApiVersion } = require("mongodb");
 
+/* Define Weather model at module scope so all routes can use it */
+const weatherSchema = new mongoose.Schema({
+	city: String,
+	weather: Number,
+	date: Date,
+});
+const Weather = mongoose.models.Weather || mongoose.model("Weather", weatherSchema);
+
 let baseURL = "https://api.weatherstack.com/current?access_key=9b76ef6fb256b5bf9bd2780d2c4ecdb9&query=";
 // const url = 'https://api.weatherstack.com/current?access_key=9b76ef6fb256b5bf9bd2780d2c4ecdb9&query=New Delhi';
 const options = {
@@ -72,37 +80,19 @@ app.get("/searchCity", async (req, res) => {
 
 
 		try {
-      await mongoose.connect(process.env.MONGO_CONNECTION_STRING);
+		await mongoose.connect(process.env.MONGO_CONNECTION_STRING);
 
-      /* Schema defining structure of a song document */
-      /* Valid types: String, Number, Date, Buffer, Boolean, Mixed,
-      ObjecdtId, Array, Decimal128, Map */
-      const weatherSchema = new mongoose.Schema({
-         city: String,
-         weather: Number,
-         date: Date,
-      });
-
-      /* Creating a Model what will allow us to complete CRUD operations
-      IMPORTANT: The first argument to model() should be the singular
-      form of the collection's name (e.g. the collection will be named
-      "songs", if you provide "Song"). Moongoose will change the argument
-      you provide to model() to plural and lowercase, and use it as the
-      collections name */
-      const Weather = mongoose.model("Weather", weatherSchema);
-
-      /* Creating a document (instance of Model) */
-      const currWeather = new Weather({
-        	city: city,
+		/* Creating a document (instance of Model) */
+		const currWeather = new Weather({
+			city: city,
 			weather: weather,
-			date: new Date()
-      });
+			date: new Date(),
+		});
 
-      /* Saving the song */
-      await currWeather.save();
+		/* Saving the document */
+		await currWeather.save();
 
-
-      mongoose.disconnect();
+		mongoose.disconnect();
    } catch (err) {
       console.error(err);
    }
@@ -113,24 +103,24 @@ app.get("/searchCity", async (req, res) => {
 	} catch (error) {
 		//console.error(error);
 		
-		res.status(404).send("<p>City not found. Please try again.</p>");
+		res.status(404).render("error");
 	}
 	
 })
 
-app.get("/previousCities", async (req, res) => {
-	const variables = {itemsTable: ""};
+app.get("/previousSearches", async (req, res) => {
+	let variables = {itemsTable: ""};
 	try {
       await mongoose.connect(process.env.MONGO_CONNECTION_STRING);
 
   
       let pastWeather = await Weather.find({});
 	  let newTable = '<table style="border: 1px double black;">';
-    newTable += '<tr> <th style="border: 1px double black;">Name</th> <th style="border: 1px double black;">Temperature</th><th style="border: 1px double black;">Date</th></tr>';
+    newTable += '<tr> <th style="border: 1px double black;">Name</th> <th style="border: 1px double black;">Temperature</th><th style="border: 1px double black;">Date of Lookup</th></tr>';
   
 	 for(const dudes of pastWeather){
         newTable += "<tr>";
-        newTable += `<td style="border: 1px double black;"> ${dudes.weather} </td> <td style="border: 1px double black;"> ${dudes.date} </td></tr>`
+        newTable += `<td style="border: 1px double black;"> ${dudes.city} </td><td style="border: 1px double black;"> ${dudes.weather} </td> <td style="border: 1px double black;"> ${dudes.date} </td></tr>`
       }
 
 
@@ -143,7 +133,7 @@ app.get("/previousCities", async (req, res) => {
    }
 
 
-	res.render("previousCity",variables);
+	res.render("savedCities",variables);
 });
 
 // try {
@@ -157,4 +147,3 @@ app.get("/previousCities", async (req, res) => {
 // 	//console.error(error);
 // 	console.log("Error");
 // }
-
