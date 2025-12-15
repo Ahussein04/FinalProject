@@ -1,0 +1,7 @@
+Submitted by: {(TBD)}
+Group Members: Christopher Liu (cliu9177), Adam Hussein (ahusse17), Alicia Wang (awang121), and Mike Peng (Lpeng126)
+App Description: Allows users to get information on the weather of a specific city, and also allows them to store/retrieve the weather data of cities at the time of their queries
+Youtube Video Link: 
+APIs: Weatherstack API (https://weatherstack.com)
+Contact Email: {(TBD)}
+Deployed App Link: 
