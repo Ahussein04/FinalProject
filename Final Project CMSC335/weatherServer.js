@@ -162,6 +162,8 @@ app.get("/clearDatabase", async (req, res) => {
     await mongoose.connect(process.env.MONGO_CONNECTION_STRING);
     await Weather.deleteMany({});
     mongoose.disconnect();
+
+	res.redirect("/previousSearches")
   } catch (e) {
     console.error(e);
   }
